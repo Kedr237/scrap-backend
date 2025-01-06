@@ -10,14 +10,12 @@ class NoteFilter(filters.FilterSet):
     )
 
     def filter_by_parent(self, queryset, name, value):
-        if value == 'null':
+        if value.lower() == 'null':
             return queryset.filter(parent__isnull=True)
-
         if value:
             return queryset.filter(parent__id=value)
-
         return queryset
 
     class Meta:
         model = Note
-        fields = ['parent']
+        fields = ['parent', 'id', 'title']
