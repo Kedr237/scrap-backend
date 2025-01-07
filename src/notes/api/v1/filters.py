@@ -5,12 +5,12 @@ from notes.models import Note
 
 class NoteFilter(filters.FilterSet):
     parent = filters.CharFilter(
-        method='filter_by_parent',
+        method="filter_by_parent",
         required=False,
     )
 
     def filter_by_parent(self, queryset, name, value):
-        if value.lower() == 'null':
+        if value.lower() == "null":
             return queryset.filter(parent__isnull=True)
         if value:
             return queryset.filter(parent__id=value)
@@ -18,4 +18,4 @@ class NoteFilter(filters.FilterSet):
 
     class Meta:
         model = Note
-        fields = ['parent', 'id', 'title']
+        fields = ["parent", "id", "title"]

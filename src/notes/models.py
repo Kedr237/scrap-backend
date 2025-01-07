@@ -14,35 +14,35 @@ class TimeMixin(models.Model):
 
 class Note(TimeMixin):
     owner = models.ForeignKey(
-        verbose_name='Note owner',
+        verbose_name="Note owner",
         to=User,
-        related_name='notes',
+        related_name="notes",
         on_delete=models.CASCADE,
 
     )
     title = models.CharField(
-        verbose_name='Note title',
+        verbose_name="Note title",
         max_length=255,
     )
     content = models.TextField(
-        verbose_name='Note content',
+        verbose_name="Note content",
         blank=True,
         null=True,
     )
     image = models.ImageField(
-        verbose_name='Image for header',
-        upload_to='notes/images/',
+        verbose_name="Image for header",
+        upload_to="notes/images/",
         blank=True,
         null=True,
     )
     parent = models.ForeignKey(
-        verbose_name='Parent note',
-        to='self',
+        verbose_name="Parent note",
+        to="self",
         null=True,
         blank=True,
-        related_name='children',
+        related_name="children",
         on_delete=models.CASCADE,
     )
 
     def __str__(self):
-        return f'{self.owner.username} | {self.title}'
+        return f"{self.owner.username} | {self.title}"

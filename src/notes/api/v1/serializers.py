@@ -6,7 +6,7 @@ from notes.models import Note
 class NoteChildrenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = ['id', 'title']
+        fields = ["id", "title"]
 
 
 class NoteSerializer(serializers.ModelSerializer):
@@ -14,5 +14,5 @@ class NoteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Note
-        fields = '__all__'
-        read_only_fields = ['owner']
+        fields = "__all__"
+        read_only_fields = ["owner"]

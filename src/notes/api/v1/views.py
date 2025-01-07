@@ -9,11 +9,11 @@ from .serializers import NoteSerializer
 
 
 class NoteViewSet(viewsets.ModelViewSet):
-    '''Needs "Authorization" header in format: Bearer {token}'''
+    """Needs "Authorization" header in format: Bearer {token}"""
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
     permission_classes = [IsAuthenticated]
-    http_method_names = ['get', 'post', 'patch', 'delete']
+    http_method_names = ["get", "post", "patch", "delete"]
     filter_backends = [DjangoFilterBackend]
     filterset_class = NoteFilter
 
