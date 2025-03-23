@@ -7,13 +7,12 @@ Models:
 
 from datetime import datetime
 
-from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import func
+from sqlalchemy.orm import Mapped, mapped_column
 
-
-from .base import BaseModel
-from .types import str_50
 from schemas import UserRole
+
+from ..base import BaseModel
 
 
 class User(BaseModel):
@@ -21,9 +20,9 @@ class User(BaseModel):
     Base user model.
 
     Attributes:
-    - username (str_50): User name.
+    - username (str): Username.
     - email (str): User email.
-    - password (str): Hashed password.
+    - hashed_password (str): Hashed password.
     - role (UserRole): System user role.
     - avatar (str): User avatar link.
     - last_seen (datetime): Date and time of the last user visit.
@@ -31,9 +30,9 @@ class User(BaseModel):
 
     __tablename__ = 'users'
 
-    username: Mapped[str_50] = mapped_column(nullable=False)
+    username: Mapped[str] = mapped_column(nullable=False)
     email: Mapped[str] = mapped_column(nullable=False)
-    password: Mapped[str] = mapped_column(nullable=False)
+    hashed_password: Mapped[str] = mapped_column(nullable=False)
     role: Mapped[UserRole] = mapped_column(default=UserRole.USER)
     avatar: Mapped[str] = mapped_column(nullable=True)
     last_seen: Mapped[datetime] = mapped_column(
