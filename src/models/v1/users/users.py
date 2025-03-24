@@ -30,8 +30,8 @@ class User(BaseModel):
 
     __tablename__ = 'users'
 
-    username: Mapped[str] = mapped_column(nullable=False)
-    email: Mapped[str] = mapped_column(nullable=False)
+    username: Mapped[str] = mapped_column(nullable=False, default='User')
+    email: Mapped[str] = mapped_column(nullable=False, unique=True)
     hashed_password: Mapped[str] = mapped_column(nullable=False)
     role: Mapped[UserRole] = mapped_column(default=UserRole.USER)
     avatar: Mapped[str] = mapped_column(nullable=True)
