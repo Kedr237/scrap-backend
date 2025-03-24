@@ -35,4 +35,5 @@ class RegisterResponseSchema(BaseResponseSchema):
     '''
 
     user_id: int
+    success: bool = True
     message: str = 'Registration was successful'
