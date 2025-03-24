@@ -2,7 +2,8 @@
 Schemas for a registration system.
 
 Schemas:
-- RegistrationSchema
+- RegisterInputSchema
+- RegisterResponseSchema
 '''
 
 from pydantic import EmailStr, Field
