@@ -14,8 +14,8 @@ from pydantic_settings import BaseSettings
 class Config(BaseSettings):
 
     TITLE: str = 'Scrap'
-    DOCS_URL: str = '/api/openapi'
-    OPENAPI_URL: str = '/api/openapi.json'
+    DOCS_URL: str = '/api/docs'
+    OPENAPI_URL: str = '/api/docs.json'
 
     ROOT_HOST: str = Field(alias='ROOT_HOST')
     ROOT_PORT: str = Field(alias='ROOT_PORT')

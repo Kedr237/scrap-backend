@@ -23,7 +23,7 @@ def get_all_routers() -> APIRouter:
 
     # Connecting version routers.
     for version in ROUTER_VERSIONS:
-        version_router = version.get_version_routers()
+        version_router = version.get_router()
         router.include_router(version_router)
 
     return router

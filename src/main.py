@@ -13,7 +13,6 @@ from core.config import config
 from core.lifespan import lifespan
 from routers import get_all_routers
 
-
 app = FastAPI(
     title=config.TITLE,
     docs_url=config.DOCS_URL,
