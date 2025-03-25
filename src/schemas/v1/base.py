@@ -10,7 +10,7 @@ Schemas:
 '''
 
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Dict, Any
 
 from pydantic import BaseModel, ConfigDict
 
@@ -29,7 +29,13 @@ class BaseSchema(BaseModel):
 
     model_config = ConfigDict(from_attributes=True)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
+        '''
+        Converts the schema instance to a dictionary.
+
+        Returns:
+        - Dict[str, Any]: A dictionary representing the schema.
+        '''
         return self.model_dump()
 
 

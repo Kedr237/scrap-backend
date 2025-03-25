@@ -1,5 +1,5 @@
 '''
-Endpoint for all models.
+Import all models.
 '''
 
 from .v1.base import BaseModel
