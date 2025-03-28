@@ -19,7 +19,7 @@ def setup_router(router: APIRouter) -> None:
         Redirects to documentation.
 
         Returns:
-        - RedirectResponse: Redirect to DOCS_URL.
+            RedirectResponse: Redirect to DOCS_URL.
         '''
 
         return RedirectResponse(url=config.DOCS_URL)

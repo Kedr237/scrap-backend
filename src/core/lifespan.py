@@ -17,9 +17,8 @@ async def lifespan(app: FastAPI):
     Is called at application startup and shutdown.
 
     Args:
-    - app: FastAPI application instance
+        app: FastAPI application instance
     '''
-
+    await database.drop_models()
     await database.init_models()
     yield
-    await database.drop_models()

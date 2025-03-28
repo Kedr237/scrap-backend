@@ -14,10 +14,10 @@ class BaseModel(DeclarativeBase):
     Base sqlalchemy model.
 
     Attributes:
-    - id (int): Model id.
-    - is_available (bool): Whether the model is available.
-    - created_at (datetime): Creation date.
-    - updated_at (datetime): Modification date.
+        id (int): Model id.
+        is_available (bool): Whether the model is available.
+        created_at (datetime): Creation date.
+        updated_at (datetime): Modification date.
     '''
 
     __abstract__ = True
@@ -38,6 +38,6 @@ class BaseModel(DeclarativeBase):
         Converts the model instance to a dictionary.
 
         Returns:
-        - Dict[str, Any]: A dictionary representing the model.
+            Dict[str, Any]: Dictionary representing the model.
         '''
         return {c.name: getattr(self, c.name) for c in self.__table__.columns}

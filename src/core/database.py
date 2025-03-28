@@ -11,7 +11,7 @@ from models import BaseModel
 
 engine = create_async_engine(
     url=config.db_url,
-    echo=True,
+    echo=False,
 )
 
 async_session = async_sessionmaker(

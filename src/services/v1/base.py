@@ -1,6 +1,11 @@
 '''
 Provides base services.
 Base services are used as templates for other services.
+
+Classes:
+    SessionMixin
+    BaseService
+    BaseManager
 '''
 
 from typing import Generic, Type, TypeVar
@@ -20,11 +25,11 @@ class SessionMixin:
     '''
     Mixin provides a database session instance.
 
-    Attributes:
-    - session (AsyncSession): Asynchronous database session.
-
     Args:
-    - session (AsyncSession): Asynchronous database session.
+        session (AsyncSession): An asynchronous database session.
+
+    Attributes:
+        session (AsyncSession): An asynchronous database session.
     '''
 
     def __init__(self, session: AsyncSession):
@@ -40,20 +45,20 @@ class BaseService(SessionMixin):
     ...
 
 
-class BaseDataManager(SessionMixin, Generic[TModel, TSchema]):
+class BaseManager(SessionMixin, Generic[TModel, TSchema]):
     '''
     Base class of data manager.
     Supports generic types.
 
-    Attributes:
-    - session (AsyncSession): Asynchronous database session.
-    - model (Type[TModel]): Data model.
-    - schema (Type[TSchema]): Data schema.
-
     Args:
-    - session (AsyncSession): Asynchronous database session.
-    - model (Type[TModel]): Data model type.
-    - schema (Type[TSchema]): Data schema type.
+        session (AsyncSession): An asynchronous database session.
+        model (Type[TModel]): Data model type.
+        schema (Type[TSchema]): Data schema type.
+
+    Attributes:
+        session (AsyncSession): An asynchronous database session.
+        model (Type[TModel]): Model type.
+        schema (Type[TSchema]): Schema type.
     '''
 
     def __init__(self, session: AsyncSession, model: Type[TModel], schema: Type[TSchema]):
@@ -66,13 +71,13 @@ class BaseDataManager(SessionMixin, Generic[TModel, TSchema]):
         Adds one entry to the database.
 
         Args:
-        - model (TModel): Data model instance.
+            model (TModel): A data model instance.
 
         Returns:
-        - TSchema | None: Schema of the added entry or None.
+            TSchema|None: A schema of the added entry or None.
 
-        Exceptions:
-        - SQLAlchemyError: An error occurred while adding the entry.
+        Raises:
+            SQLAlchemyError: An e occurred while adding the entry.
         '''
 
         try:
@@ -80,9 +85,9 @@ class BaseDataManager(SessionMixin, Generic[TModel, TSchema]):
             await self.session.commit()
             await self.session.refresh(model)
             return self.schema(**model.to_dict())
-        except SQLAlchemyError as error:
+        except SQLAlchemyError as e:
             await self.session.rollback()
-            print(f'[Error] Error while adding an entry: {error}') # Change to a logger.
+            print(f'[Error] Error while adding an entry: {e}')  # Change to a logger.
             raise
 
     async def get_one(self, select_statement: Executable) -> TModel | None:
@@ -90,18 +95,18 @@ class BaseDataManager(SessionMixin, Generic[TModel, TSchema]):
         Receives one entry from a database.
 
         Args:
-        - select_statement (Executable): SQL-query for selection.
+            select_statement (Executable): SQL-query for selection.
 
         Returns:
-        - TModel | None: Received entry as a model or None.
+            TModel|None: Received entry as a model or None.
 
-        Exceptions:
-        - SQLAlchemyError: An error occurred while getting the entry.
+        Raises:
+            SQLAlchemyError: An e occurred while getting the entry.
         '''
 
         try:
             entry = await self.session.execute(select_statement)
             return entry.scalar()
-        except SQLAlchemyError as error:
-            print(f'[Error] Error while getting an entry: {error}') # Change to a logger.
+        except SQLAlchemyError as e:
+            print(f'[Error] Error while getting an entry: {e}')  # Change to a logger.
             raise

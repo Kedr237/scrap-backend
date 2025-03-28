@@ -22,7 +22,7 @@ def get_router() -> APIRouter:
     Connects all version routers from MODULES to one router.
 
     Returns:
-    - APIRouter: Router containing all version routers.
+        APIRouter: Router containing all version routers.
     '''
 
     # Connecting routers.

@@ -2,15 +2,15 @@
 Contains schemas that define base settings
 and can be used in other schemas.
 
-Schemas:
-- BaseSchema
-- BaseModelSchema
-- BaseInputSchema
-- BaseResponseSchema
+Classes:
+    BaseSchema
+    BaseModelSchema
+    BaseInputSchema
+    BaseResponseSchema
 '''
 
 from datetime import datetime
-from typing import Optional, Dict, Any
+from typing import Any, Dict
 
 from pydantic import BaseModel, ConfigDict
 
@@ -21,10 +21,7 @@ class BaseSchema(BaseModel):
     Contains only the general configuration.
 
     Attributes:
-    - model_config (ConfigDict): Allows attributes to be used as fields.
-
-    Methods:
-    - to_dict(): Converts the object into a dictionary.
+        model_config (ConfigDict): Allows attributes to be used as fields.
     '''
 
     model_config = ConfigDict(from_attributes=True)
@@ -34,7 +31,7 @@ class BaseSchema(BaseModel):
         Converts the schema instance to a dictionary.
 
         Returns:
-        - Dict[str, Any]: A dictionary representing the schema.
+            Dict[str, Any]: A dictionary representing the schema.
         '''
         return self.model_dump()
 
@@ -45,16 +42,16 @@ class BaseModelSchema(BaseSchema):
     Contains general configuration and attributes for all model schemas.
 
     Attributes:
-    - id (int): Model id.
-    - is_available (bool): Whether the model is available.
-    - created_at (datetime): Creation date.
-    - updated_at (datetime): Modification date.
+        id (int | None): Model id.
+        is_available (bool | None): Whether the model is available.
+        created_at (datetime | None): Creation date.
+        updated_at (datetime | None): Modification date.
     '''
 
-    id: Optional[int] = None
-    is_available: Optional[bool] = None
-    created_at: Optional[datetime] = None
-    updated_at: Optional[datetime] = None
+    id: int | None = None
+    is_available: bool | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
 
 
 class BaseInputSchema(BaseSchema):
@@ -72,9 +69,9 @@ class BaseResponseSchema(BaseSchema):
     Provides a common configuration for all response schemas.
 
     Attributes:
-    - success (bool): Indicates whether the request was successful.
-    - message (Optional[str]): Message associated with the request.
+        success (bool): Indicates whether the request was successful.
+        message (str | None): Message associated with the request.
     '''
 
     success: bool
-    message: Optional[str] = None
+    message: str | None = None

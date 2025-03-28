@@ -1,8 +1,8 @@
 '''
 User models.
 
-Models:
-- User
+Classes:
+    UserModel
 '''
 
 from datetime import datetime
@@ -15,7 +15,7 @@ from schemas import UserRole
 from ..base import BaseModel
 
 
-class User(BaseModel):
+class UserModel(BaseModel):
     '''
     Base user model.
 
@@ -33,8 +33,9 @@ class User(BaseModel):
     username: Mapped[str] = mapped_column(nullable=False, default='User')
     email: Mapped[str] = mapped_column(nullable=False, unique=True)
     hashed_password: Mapped[str] = mapped_column(nullable=False)
-    role: Mapped[UserRole] = mapped_column(default=UserRole.USER)
+    role: Mapped[UserRole] = mapped_column(nullable=False, default=UserRole.USER)
     avatar: Mapped[str] = mapped_column(nullable=True)
     last_seen: Mapped[datetime] = mapped_column(
+        nullable=False,
         server_default=func.now(),
     )
