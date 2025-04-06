@@ -1,11 +1,3 @@
-'''
-Application executable.
-
-- Initializes FastAPI application.
-- Includes routers.
-- Customizes cors.
-'''
-
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 

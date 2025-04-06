@@ -1,10 +1,3 @@
-'''
-Application config.
-
-Provides access to all application configurations
-through the config object.
-'''
-
 from functools import lru_cache
 
 from pydantic import Field
@@ -37,11 +30,7 @@ class Config(BaseSettings):
 
 @lru_cache
 def get_config() -> Config:
-    '''
-    Retrieves application configurations from the cache.
-    '''
     config_instance = Config()
-
     return config_instance
 
 

@@ -1,10 +1,3 @@
-'''
-User models.
-
-Classes:
-    UserModel
-'''
-
 from datetime import datetime
 
 from sqlalchemy import func
@@ -16,17 +9,6 @@ from ..base import BaseModel
 
 
 class UserModel(BaseModel):
-    '''
-    Base user model.
-
-    Attributes:
-    - username (str): Username.
-    - email (str): User email.
-    - hashed_password (str): Hashed password.
-    - role (UserRole): System user role.
-    - avatar (str): User avatar link.
-    - last_seen (datetime): Date and time of the last user visit.
-    '''
 
     __tablename__ = 'users'
 
